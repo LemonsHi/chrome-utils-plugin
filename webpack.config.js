@@ -82,7 +82,12 @@ module.exports = {
     new MiniCssExtractPlugin(),
     isDev && new ReactRefreshPlugin(),
   ].filter(Boolean),
+
   devServer: {
     hot: true,
+    // ★ 1. 告诉 dev-server：根路径就返回 sidepanel.html
+    devMiddleware: { index: 'sidepanel.html' },
+    // ★ 2. （可选）启动时自动用浏览器打开正确页面
+    open: ['/sidepanel.html'],
   },
 };
