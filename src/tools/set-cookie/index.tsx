@@ -18,6 +18,13 @@ import { parseCookieString } from './utils';
 import { CookiePair } from '~/types/set-cookie';
 import { ComponentProps } from '~/types/tooles';
 
+/**
+ * 组件状态声明
+ *
+ * @type {[FormInstance]} form - 表单实例，用于管理和获取表单数据
+ * @type {[CookiePair[], Function]} parsed - 存储解析后的Cookie数组及其更新函数
+ * @type {[boolean, Function]} loadingSet - 控制Cookie设置过程中的加载状态及其更新函数
+ */
 const SetCookie: FC<ComponentProps> = ({ navigate }) => {
   const [form] = Form.useForm<{ cookieStr: string }>();
   const [parsed, setParsed] = useState<CookiePair[]>([]);
@@ -42,7 +49,9 @@ const SetCookie: FC<ComponentProps> = ({ navigate }) => {
   ];
 
   /**
-   * 点击【解析】
+   * 解析用户输入的Cookie字符串并更新解析结果状态。
+   *
+   * @returns {void} 无返回值，操作结果通过消息提示展示
    */
   const handleParse = () => {
     const raw = form.getFieldValue('cookieStr')?.trim();
@@ -60,7 +69,9 @@ const SetCookie: FC<ComponentProps> = ({ navigate }) => {
   };
 
   /**
-   * 将解析后的 Cookie 写入当前活动标签页
+   * 处理设置Cookies的操作，当有解析好的Cookie数据时，触发Chrome Cookie设置流程。
+   *
+   * @returns {void} 无返回值
    */
   const handleSetCookies = () => {
     if (parsed.length === 0) return;

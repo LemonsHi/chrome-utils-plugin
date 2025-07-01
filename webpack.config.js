@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -20,6 +21,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '',
     clean: true,
   },
 
@@ -60,6 +62,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '~': path.resolve(__dirname, 'src'),
+      vs: 'monaco-editor/esm/vs',
     },
   },
 
@@ -73,6 +76,10 @@ module.exports = {
       patterns: [
         { from: 'manifest.json', to: '.' },
         {
+          from: path.dirname(require.resolve('monaco-editor/min/vs/loader.js')),
+          to: 'monaco/min/vs',
+        },
+        {
           from: path.resolve(__dirname, 'public'),
           to: '.',
           globOptions: {
@@ -84,6 +91,10 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
     isDev && new ReactRefreshPlugin(),
+    new MonacoWebpackPlugin({
+      languages: ['json'], // 只打包需要的语言，体积更小
+      filename: 'monaco/[name].worker.js', // 输出到 dist/monaco
+    }),
   ].filter(Boolean),
 
   devServer: {

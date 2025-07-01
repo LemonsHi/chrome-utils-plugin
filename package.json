@@ -24,10 +24,14 @@
   },
   "homepage": "https://github.com/LemonsHi/chrome-utils-plugin#readme",
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
     "antd": "^5.26.3",
+    "lodash": "^4.17.21",
+    "monaco-editor": "^0.52.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.3"
+    "react-router-dom": "^7.6.3",
+    "react18-json-view": "^0.2.9"
   },
   "devDependencies": {
     "@babel/core": "^7.27.7",
@@ -35,6 +39,7 @@
     "@babel/preset-react": "^7.27.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.1",
     "@types/chrome": "^0.0.328",
+    "@types/lodash": "^4.17.19",
     "@types/node": "^24.0.8",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
@@ -46,6 +51,7 @@
     "less": "^4.3.0",
     "less-loader": "^12.3.0",
     "mini-css-extract-plugin": "^2.9.2",
+    "monaco-editor-webpack-plugin": "^7.1.0",
     "react-refresh": "^0.17.0",
     "rimraf": "^6.0.1",
     "style-loader": "^4.0.0",

@@ -2,6 +2,7 @@ import { LinkOutlined, CodeOutlined, EditOutlined } from '@ant-design/icons';
 
 import UrlFormatter from './url-format';
 import SetCookie from './set-cookie';
+import JsonFormatter from './json-format';
 
 import { ToolMeta } from '../types/tooles';
 
@@ -24,6 +25,7 @@ export const tools: ToolMeta[] = [
     route: '/tool/json-format',
     icon: <CodeOutlined style={DEFAULT_ICON_STYLE} />,
     minIcon: <CodeOutlined />,
+    element: JsonFormatter,
   },
   {
     key: 'set-cookie',
