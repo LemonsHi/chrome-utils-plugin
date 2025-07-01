@@ -1,9 +1,11 @@
-import React from 'react';
 import { ConfigProvider, theme } from 'antd';
-import zhCN from 'antd/locale/zh_CN'; // 中文化（可选）
+import zhCN from 'antd/locale/zh_CN';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { tools } from './tools';
+
 import Home from './pages/Home';
-// import Settings from './pages/Settings'; // 你的其它页面
+import WorkContainer from './pages/Work';
 
 export default function App() {
   return (
@@ -22,8 +24,12 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/settings" element={<Settings />} /> */}
-          {/* 继续添加你的其它工具路由 */}
+          {tools.map((tool) => (
+            <Route
+              path={`/tool/${tool.key}`}
+              element={<WorkContainer pageModule={tool.key} />}
+            />
+          ))}
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

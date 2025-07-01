@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import CardContent from './components/CardContent';
 
-import { tools } from '../../tools';
+import { tools } from '~/tools';
 
 const Home: React.FC = () => {
   const [keyword, setKeyword] = useState('');
