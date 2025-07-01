@@ -17,11 +17,14 @@ const WorkContainer: FC<Props> = ({ pageModule }) => {
     <Layout style={{ height: '100vh' }}>
       <Layout>
         <Content style={{ padding: 24, overflow: 'auto' }}>
-          {tools
-            .find((tool) => tool.key === pageModule)
-            ?.element?.({ navigate }) || (
-            <Empty description="此功能暂不支持，待开发～" />
-          )}
+          {(() => {
+            const Tool = tools.find((tool) => tool.key === pageModule)?.element;
+            return Tool ? (
+              <Tool navigate={navigate} />
+            ) : (
+              <Empty description="此功能暂不支持，待开发～" />
+            );
+          })()}
         </Content>
       </Layout>
     </Layout>
