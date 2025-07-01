@@ -1,16 +1,38 @@
 {
   "manifest_version": 3,
-  "name": "React AntD SidePanel",
-  "description": "A Chrome side panel extension built with React & Ant Design",
-  "version": "0.1.0",
+
+  "name": "Chrome Utils Plugin",
+  "description": "Dev-friendly toolbox (URL formatter, JSON formatter, Cookie tools, …) built with React & Ant Design",
+  "version": "1.0.0",
+
   "icons": {
     "16": "icons/16x16.png",
     "32": "icons/32x32.png",
     "48": "icons/48x48.png",
     "128": "icons/128x128.png"
   },
-  "action": { "default_title": "React SidePanel" },
-  "background": { "service_worker": "background.js", "type": "module" },
-  "permissions": ["sidePanel"],
-  "side_panel": { "default_path": "sidepanel.html" }
+
+  "action": {
+    "default_title": "Chrome Utils",
+    "default_icon": {
+      "16": "icons/16x16.png"
+    }
+  },
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "permissions": ["sidePanel", "tabs", "cookies", "storage"],
+
+  "host_permissions": ["<all_urls>"],
+
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }

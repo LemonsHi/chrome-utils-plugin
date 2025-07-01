@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, useState } from 'react';
 import {
   Button,
   Card,
@@ -10,13 +10,10 @@ import {
   message,
 } from 'antd';
 import { CopyOutlined, ArrowLeftOutlined } from '@ant-design/icons';
-import { NavigateFunction } from 'react-router-dom';
 
 import { formatUrl } from './utils';
 
-interface Props {
-  navigate: NavigateFunction;
-}
+import { ComponentProps } from '~/types/tooles';
 
 /**
  * 组件状态定义
@@ -27,7 +24,7 @@ interface Props {
  * @property {boolean} droppedHash - 控制是否移除URL中的哈希部分，默认为true
  * @property {URL|null} result - 存储格式化后的URL对象，初始为null
  */
-const UrlFormatter: FC<Props> = ({ navigate }) => {
+const UrlFormatter: FC<ComponentProps> = ({ navigate }) => {
   const [raw, setRaw] = useState<string>('');
   const [decoded, setDecoded] = useState(true);
   const [sorted, setSorted] = useState(true);

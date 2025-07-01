@@ -1,39 +1,34 @@
-import { FC } from 'react';
-import { Layout, Menu } from 'antd';
+import { FC, useState } from 'react';
+import { Layout, Empty } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-import UrlFormatter from '~/tools/url-format';
 import { tools } from '~/tools';
 
-const { Sider, Content } = Layout;
+const { Content } = Layout;
 
 interface Props {
   pageModule: string;
 }
 
 const WorkContainer: FC<Props> = ({ pageModule }) => {
+  const [currentTool, setCurrentTool] = useState<string>(pageModule);
   const navigate = useNavigate();
+
+  const renderTool = () => {
+    const currentToolInfo = tools.find((tool) => tool.key === currentTool);
+    debugger;
+    return (
+      currentToolInfo?.element?.({ navigate }) || (
+        <Empty description="此功能暂不支持，待开发～" />
+      )
+    );
+  };
 
   return (
     <Layout style={{ height: '100vh' }}>
-      <Sider width={72} theme="dark">
-        <Menu
-          theme="dark"
-          mode="inline"
-          selectedKeys={['url']}
-          inlineCollapsed
-          items={tools.map((tool) => ({
-            key: tool.key,
-            icon: tool.minIcon,
-            label: tool.label,
-          }))}
-        />
-      </Sider>
-
-      {/* 右侧内容区 */}
       <Layout>
         <Content style={{ padding: 24, overflow: 'auto' }}>
-          <UrlFormatter navigate={navigate} />
+          {renderTool()}
         </Content>
       </Layout>
     </Layout>

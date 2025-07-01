@@ -21,7 +21,7 @@ export default function App() {
         algorithm: theme.defaultAlgorithm,
       }}
     >
-      <BrowserRouter>
+      <BrowserRouter basename="/sidepanel.html">
         <Routes>
           <Route path="/" element={<Home />} />
           {tools.map((tool) => (

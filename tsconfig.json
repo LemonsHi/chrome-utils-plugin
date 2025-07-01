@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2019",
-    "lib": ["DOM", "ES2020"],
+    "lib": ["DOM", "ES2020", "DOM.Iterable"],
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -11,7 +11,8 @@
     "paths": { "~/*": ["src/*"] },
     "outDir": "dist",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["chrome"]
   },
   "include": ["src"]
 }
