@@ -66,7 +66,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'no-return-assign': 'off',
     'no-nested-ternary': 'off',
-    'prettier/prettier': 'off', // 任何与 Prettier 不一致的格式都视为错误
+    'prettier/prettier': 'error', // 任何与 Prettier 不一致的格式都视为错误
   },
   ignorePatterns: ['dist', 'public'],
 };

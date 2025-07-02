@@ -1,12 +1,12 @@
-import { FC } from "react";
-import { ConfigProvider, theme } from "antd";
-import zhCN from "antd/locale/zh_CN";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { FC } from 'react';
+import { ConfigProvider, theme } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { tools } from "./tools";
+import { tools } from './tools';
 
-import Home from "./pages/Home";
-import WorkContainer from "./pages/Work";
+import Home from './pages/Home';
+import WorkContainer from './pages/Work';
 
 const App: FC = () => {
   return (
@@ -16,7 +16,7 @@ const App: FC = () => {
       theme={{
         token: {
           /** 主色想改都可以改；默认就是 #1677ff */
-          colorPrimary: "#1677ff",
+          colorPrimary: '#1677ff',
         },
         /** 若想暗色模式时自动改变量，把 algorithm 换成 theme.darkAlgorithm */
         algorithm: theme.defaultAlgorithm,
@@ -25,7 +25,7 @@ const App: FC = () => {
       <BrowserRouter basename="/sidepanel.html">
         <Routes>
           <Route path="/" element={<Home />} />
-          {tools.map((tool) => (
+          {tools.map(tool => (
             <Route
               key={tool.key}
               path={`/tool/${tool.key}`}

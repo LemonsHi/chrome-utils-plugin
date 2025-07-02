@@ -20,7 +20,8 @@ const xhrUpload = (url: string, body: FormData, onProgress: ProgressCB): Promise
         onProgress(Math.round((e.loaded / e.total) * 100));
       }
     };
-    xhr.onload = () => (xhr.status === 200 ? resolve(xhr.response as string) : reject(xhr.response));
+    xhr.onload = () =>
+      xhr.status === 200 ? resolve(xhr.response as string) : reject(xhr.response);
     xhr.onerror = reject;
     xhr.send(body);
   });
