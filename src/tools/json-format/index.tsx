@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce';
 
 import JsonView from 'react18-json-view';
 
-import { ComponentProps } from '~/types/tooles';
+import { ToolProps } from '~/types/tooles';
 
 import 'react18-json-view/src/style.css';
 
@@ -18,7 +18,7 @@ import 'react18-json-view/src/style.css';
  * @type {[string|null, Function]} error - 存储解析错误信息及其更新函数
  * @type {[boolean|number, Function]} collapsed - 控制JSON树视图的折叠状态及其更新函数，2表示默认展开两层
  */
-const JsonFormatter: FC<ComponentProps> = ({ navigate }) => {
+const JsonFormatter: FC<ToolProps> = ({ navigate }) => {
   const [code, setCode] = useState<string>('{}\n');
   const [jsonObj, setJsonObj] = useState<any>({});
   const [error, setError] = useState<string | null>(null);

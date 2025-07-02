@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Button, Card, Descriptions, Input, Space, Switch, Typography, message } from 'antd';
 import { CopyOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 
-import { ComponentProps } from '~/types/tooles';
+import { ToolProps } from '~/types/tooles';
 import { DEFAULT_HOST, formatUrl } from './utils';
 
 /**
@@ -14,7 +14,7 @@ import { DEFAULT_HOST, formatUrl } from './utils';
  * @property {boolean} droppedHash - 控制是否移除URL中的哈希部分，默认为true
  * @property {URL|null} result - 存储格式化后的URL对象，初始为null
  */
-const UrlFormatter: FC<ComponentProps> = ({ navigate }) => {
+const UrlFormatter: FC<ToolProps> = ({ navigate }) => {
   const [raw, setRaw] = useState<string>('');
   const [decoded, setDecoded] = useState(true);
   const [sorted, setSorted] = useState(true);

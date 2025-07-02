@@ -4,7 +4,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
 import { CookiePair } from '~/types/set-cookie';
-import { ComponentProps } from '~/types/tooles';
+import { ToolProps } from '~/types/tooles';
 import { setChromeCookie } from './chromeApi';
 import { parseCookieString } from './utils';
 
@@ -15,7 +15,7 @@ import { parseCookieString } from './utils';
  * @type {[CookiePair[], Function]} parsed - 存储解析后的Cookie数组及其更新函数
  * @type {[boolean, Function]} loadingSet - 控制Cookie设置过程中的加载状态及其更新函数
  */
-const SetCookie: FC<ComponentProps> = ({ navigate }) => {
+const SetCookie: FC<ToolProps> = ({ navigate }) => {
   const [form] = Form.useForm<{ cookieStr: string }>();
   const [parsed, setParsed] = useState<CookiePair[]>([]);
   const [loadingSet, setLoadingSet] = useState(false);

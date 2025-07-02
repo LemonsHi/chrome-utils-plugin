@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 import copy from 'copy-to-clipboard';
 
 import { ProgressCB, Row } from '~/types/image-upload';
-import { ComponentProps } from '~/types/tooles';
+import { ToolProps } from '~/types/tooles';
 import { commonUpload } from './cdnUploader';
 
 const { Dragger } = Upload;
@@ -13,7 +13,7 @@ const MAX_SIZE = 20 * 1024 * 1024; // 20 MB
 
 const CDN_OPTIONS = [{ label: 'ImgBB', value: 'imgbb' }];
 
-const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
+const ImgUploadPage: FC<ToolProps> = ({ navigate }) => {
   const [cdn, setCdn] = useState<string>('imgbb');
   const [rows, setRows] = useState<Row[]>([]);
 

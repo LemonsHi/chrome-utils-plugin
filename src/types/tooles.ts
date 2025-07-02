@@ -11,6 +11,6 @@ export interface ToolMeta {
   element?: any;
 }
 
-export interface ComponentProps {
+export interface ToolProps {
   navigate: NavigateFunction;
 }
