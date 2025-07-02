@@ -1,9 +1,16 @@
-import { LinkOutlined, CodeOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
+import {
+  LinkOutlined,
+  CodeOutlined,
+  EditOutlined,
+  UploadOutlined,
+  QrcodeOutlined,
+} from '@ant-design/icons';
 
 import UrlFormatter from './url-format';
 import SetCookie from './set-cookie';
 import JsonFormatter from './json-format';
 import ImgUploadPage from './image-upload';
+import UrlToQr from './url-to-qr';
 
 import { ToolMeta } from '../types/tooles';
 
@@ -45,5 +52,14 @@ export const tools: ToolMeta[] = [
     icon: <UploadOutlined style={DEFAULT_ICON_STYLE} />,
     minIcon: <UploadOutlined />,
     element: ImgUploadPage,
+  },
+  {
+    key: 'url-to-qr',
+    title: '二维码生成',
+    label: '二维码',
+    route: '/tool/url-to-qr',
+    icon: <QrcodeOutlined style={DEFAULT_ICON_STYLE} />,
+    minIcon: <QrcodeOutlined />,
+    element: UrlToQr,
   },
 ];
