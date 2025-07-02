@@ -1,7 +1,7 @@
 # chrome-utils-plugin
 
-基于 **React**、**TypeScript** 与 **Ant Design** 打造的 Chrome 自定义工具插件，
-依托 Chrome **Side Panel** 集成多种常用小工具。
+基于 **React**、**TypeScript** 与 **Ant Design** 打造的 Chrome 自定义工具插件，依托 Chrome **Side Panel** 集成多种常用小工具。
+后台脚本采用 Manifest V3 Service Worker，实现与侧边栏的无缝协作。
 
 ## 功能
 
@@ -9,6 +9,7 @@
 - **Cookie 设置**：将粘贴的 Cookie 字符串解析为表格，一键写入当前标签页。
 - **JSON 格式化**：提供编辑器和树状视图，可折叠并实时同步。
 - **图片上传**：拖拽、粘贴或选择图片后上传至 CDN（默认 ImgBB），并自动复制外链。
+- **二维码生成**：将当前或自定义链接转换为二维码，支持复制和下载。
 - **工具搜索**：在 side panel 中快速按关键字定位所需工具。
 
 ## 安装与使用
@@ -18,7 +19,7 @@
 3. 使用 `npm run build` 生成生产包，结果输出至 `dist/` 目录。
 4. 在 Chrome 扩展管理页选择“加载未解压的扩展”，指向 `dist/` 目录调试。
 
-建议在发布前运行 `npm run lint` 与 `npm run type-check`，以保证代码质量和类型安全。
+建议在发布前运行 `npm run lint:fix` 与 `npm run type-check`，以保证代码质量和类型安全。
 
 ## 项目目录结构
 
