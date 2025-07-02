@@ -1,8 +1,14 @@
-import { LinkOutlined, CodeOutlined, EditOutlined } from '@ant-design/icons';
+import {
+  LinkOutlined,
+  CodeOutlined,
+  EditOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 
 import UrlFormatter from './url-format';
 import SetCookie from './set-cookie';
 import JsonFormatter from './json-format';
+import ImgUploadPage from './image-upload';
 
 import { ToolMeta } from '../types/tooles';
 
@@ -35,5 +41,14 @@ export const tools: ToolMeta[] = [
     icon: <EditOutlined style={DEFAULT_ICON_STYLE} />,
     minIcon: <EditOutlined />,
     element: SetCookie,
+  },
+  {
+    key: 'image-upload',
+    title: '图片上传',
+    label: '图片上传',
+    route: '/tool/image-upload',
+    icon: <UploadOutlined style={DEFAULT_ICON_STYLE} />,
+    minIcon: <UploadOutlined />,
+    element: ImgUploadPage,
   },
 ];
