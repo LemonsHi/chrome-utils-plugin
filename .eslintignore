@@ -3,3 +3,4 @@ node_modules
 public
 .eslintrc.cjs
 prettier.config.cjs
+webpack.config.js
