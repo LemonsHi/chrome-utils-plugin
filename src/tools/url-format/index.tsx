@@ -11,7 +11,7 @@ import {
 } from 'antd';
 import { CopyOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 
-import { formatUrl } from './utils';
+import { DEFAULT_HOST, formatUrl } from './utils';
 
 import { ComponentProps } from '~/types/tooles';
 
@@ -133,11 +133,17 @@ const UrlFormatter: FC<ComponentProps> = ({ navigate }) => {
           <Descriptions column={1} size="small" bordered>
             <Descriptions.Item label="协议">
               <Typography.Text copyable>
-                {result.protocol.replace(':', '')}
+                {result.hostname.includes(DEFAULT_HOST)
+                  ? '(无)'
+                  : result.protocol.replace(':', '')}
               </Typography.Text>
             </Descriptions.Item>
             <Descriptions.Item label="域名">
-              <Typography.Text copyable>{result.hostname}</Typography.Text>
+              <Typography.Text copyable>
+                {result.hostname.includes(DEFAULT_HOST)
+                  ? '(无)'
+                  : result.hostname}
+              </Typography.Text>
             </Descriptions.Item>
             <Descriptions.Item label="路径">
               <Typography.Text copyable>
