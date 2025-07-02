@@ -11,21 +11,17 @@ const DEFAULT_EXPIRATION = 6000;
  * @param {ProgressCB} onProgress 进度回调函数，用于接收上传进度百分比
  * @returns {Promise<string>} 返回一个Promise，解析为服务器响应的字符串
  */
-const xhrUpload = (
-  url: string,
-  body: FormData,
-  onProgress: ProgressCB
-): Promise<string> => {
+const xhrUpload = (url: string, body: FormData, onProgress: ProgressCB): Promise<string> => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url);
-    xhr.upload.onprogress = (e) => {
+    xhr.upload.onprogress = e => {
       if (e.lengthComputable) {
         onProgress(Math.round((e.loaded / e.total) * 100));
       }
     };
     xhr.onload = () =>
-      xhr.status === 200 ? resolve(xhr.response) : reject(xhr.response);
+      xhr.status === 200 ? resolve(xhr.response as string) : reject(xhr.response);
     xhr.onerror = reject;
     xhr.send(body);
   });
@@ -38,11 +34,7 @@ const xhrUpload = (
  * @param {ProgressCB} onProgress 上传进度回调函数，用于实时更新上传进度
  * @returns {Promise<string>} 返回上传成功后的图片URL地址
  */
-export const commonUpload = async (
-  file: File,
-  onProgress: ProgressCB
-): Promise<string> => {
-  const key = `${Date.now()}-${file.name}`;
+export const commonUpload = async (file: File, onProgress: ProgressCB): Promise<string> => {
   const fd = new FormData();
   fd.append('image', file);
   const responseStr = await xhrUpload(
@@ -52,5 +44,5 @@ export const commonUpload = async (
   );
   const response = JSON.parse(responseStr);
 
-  return response?.data?.display_url;
+  return (response?.data?.display_url || '') as string;
 };

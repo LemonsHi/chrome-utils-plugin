@@ -1,9 +1,4 @@
-import {
-  LinkOutlined,
-  CodeOutlined,
-  EditOutlined,
-  UploadOutlined,
-} from '@ant-design/icons';
+import { LinkOutlined, CodeOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
 
 import UrlFormatter from './url-format';
 import SetCookie from './set-cookie';

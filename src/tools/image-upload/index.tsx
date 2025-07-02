@@ -1,25 +1,12 @@
 import { useState, useCallback, useEffect, FC } from 'react';
-import {
-  Upload,
-  Progress,
-  List,
-  Select,
-  Typography,
-  Space,
-  Button,
-  message,
-} from 'antd';
-import {
-  InboxOutlined,
-  CheckCircleFilled,
-  ArrowLeftOutlined,
-} from '@ant-design/icons';
+import { Upload, Progress, List, Select, Typography, Space, Button, message } from 'antd';
+import { InboxOutlined, CheckCircleFilled, ArrowLeftOutlined } from '@ant-design/icons';
 import { v4 as uuid } from 'uuid';
 import copy from 'copy-to-clipboard';
-import { commonUpload } from './cdnUploader';
 
 import { ProgressCB, Row } from '~/types/image-upload';
 import { ComponentProps } from '~/types/tooles';
+import { commonUpload } from './cdnUploader';
 
 const { Dragger } = Upload;
 const MAX_SIZE = 20 * 1024 * 1024; // 20 MB
@@ -40,7 +27,7 @@ const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
    * @returns {void}
    */
   const patch = useCallback((uid: string, data: Partial<Row>) => {
-    setRows((prev) => prev.map((r) => (r.uid === uid ? { ...r, ...data } : r)));
+    setRows(prev => prev.map(r => (r.uid === uid ? { ...r, ...data } : r)));
   }, []);
 
   /**
@@ -51,7 +38,7 @@ const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
    * @returns {Promise<void>} 上传操作的异步结果
    */
   const startUpload = async (file: File, uid: string) => {
-    const tick: ProgressCB = (p) => patch(uid, { percent: p });
+    const tick: ProgressCB = p => patch(uid, { percent: p });
     try {
       const url = await commonUpload(file, tick);
       patch(uid, { url, percent: 100, status: 'done' });
@@ -79,7 +66,7 @@ const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
       return Upload.LIST_IGNORE;
     }
     const uid = uuid();
-    setRows((prev) => [
+    setRows(prev => [
       ...prev,
       {
         uid,
@@ -112,10 +99,7 @@ const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
     <Space direction="vertical" style={{ width: '100%' }}>
       {/* 标题 */}
       <Typography.Title level={4} style={{ margin: 0, marginBottom: 16 }}>
-        <ArrowLeftOutlined
-          style={{ marginRight: 8 }}
-          onClick={() => navigate('/')}
-        />
+        <ArrowLeftOutlined style={{ marginRight: 8 }} onClick={() => navigate('/')} />
         图片上传
       </Typography.Title>
       <Space style={{ marginBottom: 16 }}>
@@ -124,7 +108,7 @@ const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
           style={{ width: 160 }}
           value={cdn}
           options={CDN_OPTIONS}
-          onChange={(v) => setCdn(v)}
+          onChange={v => setCdn(v)}
         />
       </Space>
 
@@ -144,12 +128,13 @@ const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
 
       <List
         dataSource={rows}
-        renderItem={(r) => (
+        renderItem={r => (
           <List.Item
             actions={
               r.url
                 ? [
                     <Button
+                      key="copy"
                       size="small"
                       type="link"
                       onClick={() => {
@@ -167,9 +152,7 @@ const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
               title={
                 <Space>
                   <Typography.Text>{r.name}</Typography.Text>
-                  {r.status === 'done' && (
-                    <CheckCircleFilled style={{ color: '#52c41a' }} />
-                  )}
+                  {r.status === 'done' && <CheckCircleFilled style={{ color: '#52c41a' }} />}
                 </Space>
               }
               description={`${(r.size / 1024).toFixed(1)} KB`}
@@ -178,11 +161,7 @@ const ImgUploadPage: FC<ComponentProps> = ({ navigate }) => {
               <Progress
                 percent={r.percent}
                 status={
-                  r.status === 'error'
-                    ? 'exception'
-                    : r.status === 'done'
-                    ? 'success'
-                    : 'active'
+                  r.status === 'error' ? 'exception' : r.status === 'done' ? 'success' : 'active'
                 }
                 showInfo={false}
                 strokeWidth={6}

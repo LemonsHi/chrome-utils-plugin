@@ -1,22 +1,12 @@
 import { FC, useState } from 'react';
-import {
-  Form,
-  Input,
-  Button,
-  Table,
-  Space,
-  Typography,
-  message,
-  Card,
-} from 'antd';
+import { Form, Input, Button, Table, Space, Typography, message, Card } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 
-import { setChromeCookie } from './chromeApi';
-import { parseCookieString } from './utils';
-
 import { CookiePair } from '~/types/set-cookie';
 import { ComponentProps } from '~/types/tooles';
+import { setChromeCookie } from './chromeApi';
+import { parseCookieString } from './utils';
 
 /**
  * 组件状态声明
@@ -35,12 +25,12 @@ const SetCookie: FC<ComponentProps> = ({ navigate }) => {
       title: 'Name',
       dataIndex: 'name',
       width: '30%',
-      render: (text) => <Typography.Text copyable>{text}</Typography.Text>,
+      render: text => <Typography.Text copyable>{text}</Typography.Text>,
     },
     {
       title: 'Value',
       dataIndex: 'value',
-      render: (text) => (
+      render: text => (
         <Typography.Text copyable ellipsis={{ tooltip: text }}>
           {text}
         </Typography.Text>
@@ -54,12 +44,12 @@ const SetCookie: FC<ComponentProps> = ({ navigate }) => {
    * @returns {void} 无返回值，操作结果通过消息提示展示
    */
   const handleParse = () => {
-    const raw = form.getFieldValue('cookieStr')?.trim();
+    const raw = form.getFieldValue('cookieStr')?.trim?.();
     if (!raw) {
       message.warning('请先输入 Cookie 字符串');
       return;
     }
-    const list = parseCookieString(raw);
+    const list = parseCookieString(raw as string);
     if (list.length === 0) {
       message.error('未解析到任何 Cookie');
       return;
@@ -84,10 +74,7 @@ const SetCookie: FC<ComponentProps> = ({ navigate }) => {
     <Space direction="vertical" style={{ width: '100%' }} size="large">
       {/* 标题 */}
       <Typography.Title level={4} style={{ margin: 0 }}>
-        <ArrowLeftOutlined
-          style={{ marginRight: 8 }}
-          onClick={() => navigate('/')}
-        />
+        <ArrowLeftOutlined style={{ marginRight: 8 }} onClick={() => navigate('/')} />
         Cookie 设置
       </Typography.Title>
 
@@ -123,13 +110,7 @@ const SetCookie: FC<ComponentProps> = ({ navigate }) => {
 
       {/* 预览表格 */}
       {parsed.length > 0 && (
-        <Table
-          size="small"
-          bordered
-          columns={columns}
-          dataSource={parsed}
-          pagination={false}
-        />
+        <Table size="small" bordered columns={columns} dataSource={parsed} pagination={false} />
       )}
     </Space>
   );

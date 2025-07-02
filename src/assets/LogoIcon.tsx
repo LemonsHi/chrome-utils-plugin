@@ -1,7 +1,7 @@
 import React from 'react';
 
 /** 拼图形插件 Logo（24×24；stroke-width: 2） */
-const LogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+const LogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = props => (
   <svg
     width={32} /* 设计稿 ≈32 px，可随 props 覆盖 */
     height={32}

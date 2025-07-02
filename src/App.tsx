@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { ConfigProvider, theme } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -7,11 +8,11 @@ import { tools } from './tools';
 import Home from './pages/Home';
 import WorkContainer from './pages/Work';
 
-export default function App() {
+const App: FC = () => {
   return (
     <ConfigProvider
       locale={zhCN}
-      /** 这里就是方案 3 的关键点 **/
+      /** 这里就是方案 3 的关键点 * */
       theme={{
         token: {
           /** 主色想改都可以改；默认就是 #1677ff */
@@ -24,8 +25,9 @@ export default function App() {
       <BrowserRouter basename="/sidepanel.html">
         <Routes>
           <Route path="/" element={<Home />} />
-          {tools.map((tool) => (
+          {tools.map(tool => (
             <Route
+              key={tool.key}
               path={`/tool/${tool.key}`}
               element={<WorkContainer pageModule={tool.key} />}
             />
@@ -34,4 +36,6 @@ export default function App() {
       </BrowserRouter>
     </ConfigProvider>
   );
-}
+};
+
+export default App;

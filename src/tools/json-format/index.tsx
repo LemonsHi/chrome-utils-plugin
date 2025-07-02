@@ -33,7 +33,7 @@ const JsonFormatter: FC<ComponentProps> = ({ navigate }) => {
       setJsonObj(obj);
       setError(null);
     } catch (e: any) {
-      setError(e.message);
+      setError(e.message as string);
     }
   }, []);
 
@@ -63,7 +63,7 @@ const JsonFormatter: FC<ComponentProps> = ({ navigate }) => {
       setError(null);
       message.success('已格式化 JSON');
     } catch (e: any) {
-      setError(e.message);
+      setError(e.message as string);
     }
   }, [code]);
 
@@ -85,10 +85,7 @@ const JsonFormatter: FC<ComponentProps> = ({ navigate }) => {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* 标题 */}
       <Typography.Title level={4} style={{ margin: 0, marginBottom: 16 }}>
-        <ArrowLeftOutlined
-          style={{ marginRight: 8 }}
-          onClick={() => navigate('/')}
-        />
+        <ArrowLeftOutlined style={{ marginRight: 8 }} onClick={() => navigate('/')} />
         JSON 格式化
       </Typography.Title>
 
@@ -102,14 +99,7 @@ const JsonFormatter: FC<ComponentProps> = ({ navigate }) => {
       </Space>
 
       {/* 错误提示 */}
-      {error && (
-        <Alert
-          type="error"
-          showIcon
-          message={error}
-          style={{ marginBottom: 8 }}
-        />
-      )}
+      {error && <Alert type="error" showIcon message={error} style={{ marginBottom: 8 }} />}
 
       <div
         style={{
@@ -121,15 +111,12 @@ const JsonFormatter: FC<ComponentProps> = ({ navigate }) => {
         }}
       >
         {/* Monaco 编辑器 */}
-        <Card
-          style={{ flex: 1, minWidth: 0, minHeight: 0 }}
-          bodyStyle={{ height: '100%' }}
-        >
+        <Card style={{ flex: 1, minWidth: 0, minHeight: 0 }} bodyStyle={{ height: '100%' }}>
           <Editor
             height="100%" // 关键：随容器高度自适应
             defaultLanguage="json"
             value={code}
-            onMount={(editor) => (editorRef.current = editor)}
+            onMount={editor => (editorRef.current = editor)}
             onChange={onCodeChange}
             options={{
               minimap: { enabled: false },

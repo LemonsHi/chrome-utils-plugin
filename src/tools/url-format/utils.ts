@@ -9,8 +9,7 @@ export const formatUrl = (raw: string, opts: FormatOptions): URL | null => {
     const trimmed = raw.trim();
     if (!trimmed) return null;
 
-    const needsBase =
-      !/^[a-zA-Z][\w.+-]*:\/\//.test(raw) && !QUERY_ONLY.test(raw);
+    const needsBase = !/^[a-zA-Z][\w.+-]*:\/\//.test(raw) && !QUERY_ONLY.test(raw);
 
     // ① 纯查询串：直接丢给 URLSearchParams
     if (/^\?/.test(trimmed)) {
@@ -30,7 +29,8 @@ export const formatUrl = (raw: string, opts: FormatOptions): URL | null => {
 
     // ③ 若用了虚拟 base，就抹掉占位信息
     if (url.hostname === DEFAULT_HOST) {
-      url.hostname = url.host = '';
+      url.host = '';
+      url.hostname = '';
       url.protocol = '';
     }
 
@@ -47,9 +47,7 @@ export const formatUrl = (raw: string, opts: FormatOptions): URL | null => {
       url.pathname = decodeURIComponent(url.pathname);
       // decode each search param value
       const decoded = new URLSearchParams();
-      url.searchParams.forEach((v, k) =>
-        decoded.append(k, decodeURIComponent(v))
-      );
+      url.searchParams.forEach((v, k) => decoded.append(k, decodeURIComponent(v)));
       url.search = decoded.toString() ? `?${decoded.toString()}` : '';
     }
 

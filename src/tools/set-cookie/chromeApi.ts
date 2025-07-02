@@ -17,7 +17,7 @@ interface ParamProps {
  * @returns {void} 无返回值，操作结果通过消息提示展示
  */
 export const setChromeCookie = ({ parsed, setLoadingSet }: ParamProps) => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     /** step1: 检查标签页有效性 */
     const tab = tabs[0];
     if (!tab?.url) {
@@ -55,8 +55,8 @@ export const setChromeCookie = ({ parsed, setLoadingSet }: ParamProps) => {
 
     /** step4: 执行所有 Cookie 设置任务 */
     Promise.allSettled(tasks)
-      .then((results) => {
-        const failed = results.filter((r) => r.status === 'rejected').length;
+      .then(results => {
+        const failed = results.filter(r => r.status === 'rejected').length;
         const success = results.length - failed;
         if (failed > 0) {
           message.warning(`写入完成，成功 ${success} 条，失败 ${failed} 条`);

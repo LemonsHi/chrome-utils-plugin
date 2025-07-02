@@ -1,19 +1,9 @@
 import { FC, useState } from 'react';
-import {
-  Button,
-  Card,
-  Descriptions,
-  Input,
-  Space,
-  Switch,
-  Typography,
-  message,
-} from 'antd';
+import { Button, Card, Descriptions, Input, Space, Switch, Typography, message } from 'antd';
 import { CopyOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 
-import { DEFAULT_HOST, formatUrl } from './utils';
-
 import { ComponentProps } from '~/types/tooles';
+import { DEFAULT_HOST, formatUrl } from './utils';
 
 /**
  * 组件状态定义
@@ -77,19 +67,21 @@ const UrlFormatter: FC<ComponentProps> = ({ navigate }) => {
   };
 
   const configs = [
-    { label: '解码保留字符', checked: decoded, onChange: setDecoded },
-    { label: '排序查询参数', checked: sorted, onChange: setSorted },
-    { label: '去除锚点', checked: droppedHash, onChange: setDroppedHash },
+    { key: '1', label: '解码保留字符', checked: decoded, onChange: setDecoded },
+    { key: '2', label: '排序查询参数', checked: sorted, onChange: setSorted },
+    {
+      key: '3',
+      label: '去除锚点',
+      checked: droppedHash,
+      onChange: setDroppedHash,
+    },
   ];
 
   return (
     <Space direction="vertical" size="large" style={{ width: '100%' }}>
       {/* 标题 */}
       <Typography.Title level={4} style={{ margin: 0 }}>
-        <ArrowLeftOutlined
-          style={{ marginRight: 8 }}
-          onClick={() => navigate('/')}
-        />
+        <ArrowLeftOutlined style={{ marginRight: 8 }} onClick={() => navigate('/')} />
         URL 格式化
       </Typography.Title>
 
@@ -100,13 +92,14 @@ const UrlFormatter: FC<ComponentProps> = ({ navigate }) => {
           autoSize={{ minRows: 6, maxRows: 12 }}
           showCount
           value={raw}
-          onChange={(e) => setRaw(e.target.value)}
+          onChange={e => setRaw(e.target.value)}
         />
 
         {/* 可选项 */}
         <Space direction="vertical" style={{ width: '100%', marginTop: 32 }}>
-          {configs.map((config) => (
+          {configs.map(config => (
             <Space
+              key={config.key}
               align="center"
               style={{ width: '100%', justifyContent: 'space-between' }}
             >
@@ -117,12 +110,7 @@ const UrlFormatter: FC<ComponentProps> = ({ navigate }) => {
         </Space>
 
         {/* 操作按钮 */}
-        <Button
-          type="primary"
-          block
-          onClick={handleFormat}
-          style={{ marginTop: 32 }}
-        >
+        <Button type="primary" block onClick={() => handleFormat()} style={{ marginTop: 32 }}>
           格式化
         </Button>
       </Card>
@@ -133,22 +121,16 @@ const UrlFormatter: FC<ComponentProps> = ({ navigate }) => {
           <Descriptions column={1} size="small" bordered>
             <Descriptions.Item label="协议">
               <Typography.Text copyable>
-                {result.hostname.includes(DEFAULT_HOST)
-                  ? '(无)'
-                  : result.protocol.replace(':', '')}
+                {result.hostname.includes(DEFAULT_HOST) ? '(无)' : result.protocol.replace(':', '')}
               </Typography.Text>
             </Descriptions.Item>
             <Descriptions.Item label="域名">
               <Typography.Text copyable>
-                {result.hostname.includes(DEFAULT_HOST)
-                  ? '(无)'
-                  : result.hostname}
+                {result.hostname.includes(DEFAULT_HOST) ? '(无)' : result.hostname}
               </Typography.Text>
             </Descriptions.Item>
             <Descriptions.Item label="路径">
-              <Typography.Text copyable>
-                {result.pathname || '/'}
-              </Typography.Text>
+              <Typography.Text copyable>{result.pathname || '/'}</Typography.Text>
             </Descriptions.Item>
             <Descriptions.Item label="查询参数">
               {Array.from(result.searchParams.entries()).length > 0 ? (
@@ -173,10 +155,10 @@ const UrlFormatter: FC<ComponentProps> = ({ navigate }) => {
               width: '100%',
             }}
           >
-            <Button icon={<CopyOutlined />} onClick={handleCopyAll}>
+            <Button icon={<CopyOutlined />} onClick={() => handleCopyAll()}>
               复制全部
             </Button>
-            <Button danger onClick={handleClear}>
+            <Button danger onClick={() => handleClear()}>
               清空
             </Button>
           </Space>
