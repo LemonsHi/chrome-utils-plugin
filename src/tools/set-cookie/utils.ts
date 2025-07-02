@@ -9,7 +9,7 @@ import { CookiePair } from '~/types/set-cookie';
 export const parseCookieString = (raw: string): CookiePair[] => {
   return raw
     .split(';')
-    .map((part) => part.trim())
+    .map(part => part.trim())
     .filter(Boolean)
     .map((part, idx) => {
       const eqIndex = part.indexOf('=');

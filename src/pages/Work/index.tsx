@@ -18,7 +18,7 @@ const WorkContainer: FC<Props> = ({ pageModule }) => {
       <Layout>
         <Content style={{ padding: 24, overflow: 'auto' }}>
           {(() => {
-            const Tool = tools.find((tool) => tool.key === pageModule)?.element;
+            const Tool = tools.find(tool => tool.key === pageModule)?.element;
             return Tool ? (
               <Tool navigate={navigate} />
             ) : (

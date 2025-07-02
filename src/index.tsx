@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import { loader as MonacoLoader } from '@monaco-editor/react';
+import { loader as MonacoLoader}  from '@monaco-editor/react';
 
 import App from './App';
 

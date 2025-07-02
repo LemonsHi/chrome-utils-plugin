@@ -15,7 +15,7 @@ const CardContent: FC<Props> = ({ list, navigate }) => {
   return (
     <Content>
       <Row gutter={[16, 16]}>
-        {list.map((t) => (
+        {list.map(t => (
           <Col span={12} key={t.key}>
             <Card
               hoverable
@@ -24,9 +24,7 @@ const CardContent: FC<Props> = ({ list, navigate }) => {
               onClick={() => navigate(t.route)}
             >
               {t.icon}
-              <div style={{ marginTop: 8, fontSize: 14, fontWeight: 500 }}>
-                {t.title}
-              </div>
+              <div style={{ marginTop: 8, fontSize: 14, fontWeight: 500 }}>{t.title}</div>
             </Card>
           </Col>
         ))}

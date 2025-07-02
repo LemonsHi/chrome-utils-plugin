@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { Layout, Input, theme } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
+import { tools } from '~/tools';
 import Header from './components/Header';
 import CardContent from './components/CardContent';
-
-import { tools } from '~/tools';
 
 const Home: React.FC = () => {
   const [keyword, setKeyword] = useState('');
@@ -19,9 +18,7 @@ const Home: React.FC = () => {
   });
 
   return (
-    <Layout
-      style={{ height: '100vh', padding: 16, background: token.colorBgLayout }}
-    >
+    <Layout style={{ height: '100vh', padding: 16, background: token.colorBgLayout }}>
       {/* Header */}
       <Header navigate={navigate} />
 
@@ -29,7 +26,7 @@ const Home: React.FC = () => {
       <Input.Search
         placeholder="搜索工具 (URL / JSON …)"
         allowClear
-        onChange={(e) => setKeyword(e.target.value)}
+        onChange={e => setKeyword(e.target.value)}
         onSearch={() => {
           if (list.length) navigate(list[0].route);
         }}
