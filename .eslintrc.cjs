@@ -40,7 +40,6 @@ module.exports = {
     // 示例：增删规则可按团队习惯微调
     'react/react-in-jsx-scope': 'off', // React 17+ 不再需要显式 import React
     'react/jsx-props-no-spreading': 'off',
-    '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/consistent-type-imports': 'off',
