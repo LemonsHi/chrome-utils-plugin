@@ -34,10 +34,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
+        use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.less$/i,
@@ -78,6 +75,9 @@ module.exports = {
         {
           from: path.dirname(require.resolve('monaco-editor/min/vs/loader.js')),
           to: 'monaco/min/vs',
+          globOptions: {
+            ignore: ['**/tsWorker.js'], // 忽略 .map 文件
+          },
         },
         {
           from: path.resolve(__dirname, 'public'),

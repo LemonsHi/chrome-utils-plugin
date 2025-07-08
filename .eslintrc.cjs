@@ -58,6 +58,7 @@ module.exports = {
     'consistent-return': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'warn',
     '@typescript-eslint/no-unsafe-call': 'warn',
     '@typescript-eslint/no-unsafe-member-access': 'warn',
@@ -69,3 +70,5 @@ module.exports = {
   },
   ignorePatterns: ['dist', 'public'],
 };
+
+// eslint@typescript-eslint/no-unused-expressions
