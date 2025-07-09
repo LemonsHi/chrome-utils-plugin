@@ -20,13 +20,7 @@ if (process.env.NODE_ENV !== 'development') {
     window.MonacoEnvironment = {
       createTrustedTypesPolicy: undefined,
       getWorker: (_: string, label: string) => {
-        const map: Record<string, string> = {
-          json: 'json.worker.js',
-          css: 'css.worker.js',
-          html: 'html.worker.js',
-          typescript: 'ts.worker.js',
-          javascript: 'ts.worker.js',
-        };
+        const map: Record<string, string> = { json: 'json.worker.js' };
         const workerPath = map[label] || 'editor.worker.js';
         return new Worker(chrome.runtime.getURL(`monaco/${workerPath}`), {
           type: 'module',

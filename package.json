@@ -1,18 +1,25 @@
 {
-  "name": "chrome-utils-plugin",
+  "name": "dev-utils-plugin",
   "version": "1.0.0",
-  "description": "chrome 自定义工具插件",
+  "description": "自定义工具插件",
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --config webpack.config.js --mode development --hot --open",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.js --mode production",
+    "build:firefox": "rimraf dist/firefox && cross-env NODE_ENV=production BROWSER=firefox webpack --config webpack.config.js --mode production",
+    "build:chrome": "rimraf dist/chrome && cross-env NODE_ENV=production BROWSER=chrome webpack --config webpack.config.js --mode production",
     "clean": "rimraf dist",
     "type-check": "tsc --noEmit",
     "format": "npx prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,less,md}\"",
     "lint:fix": "npx eslint \"src/**/*.{ts,tsx}\" --fix",
     "prepare": "husky install",
-    "start": "npm run dev"
+    "bootstrap": "npm run preinstall && npm ci",
+    "preinstall": "node -v | grep -q '^v20' || (echo 'Node.js version must be >= v20.0.0' && exit 1)",
+    "prePublish:firefox": "rimraf web-ext-artifacts && npm run build:firefox && npx web-ext build --source-dir=dist/firefox --overwrite-dest"
   },
+  "engines": {
+    "node": "^20.0.0"
+  },
+  "engineStrict": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LemonsHi/chrome-utils-plugin.git"
@@ -36,7 +43,8 @@
     "react-qr-code": "^2.0.16",
     "react-router-dom": "^7.6.3",
     "react18-json-view": "^0.2.9",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.27.7",
@@ -49,6 +57,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/uuid": "^10.0.0",
+    "@types/webextension-polyfill": "^0.12.3",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "babel-loader": "^10.0.0",
@@ -79,6 +88,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3",
+    "web-ext": "^8.8.0",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"

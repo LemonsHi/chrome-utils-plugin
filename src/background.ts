@@ -1,3 +1,9 @@
+import browser from 'webextension-polyfill';
+
+const isFirefox = chrome.runtime.getURL('').startsWith('moz-extension://');
+
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(console.error);
+  isFirefox
+    ? browser.sidebarAction.setPanel({ panel: 'sidepanel.html' })
+    : chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(console.error);
 });
