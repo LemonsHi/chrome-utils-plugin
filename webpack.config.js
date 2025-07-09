@@ -8,6 +8,7 @@ const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
+const isFirefox = process.env.BROWSER === 'firefox';
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
@@ -20,7 +21,7 @@ module.exports = {
 
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, `dist/${isFirefox ? 'firefox' : 'chrome'}`),
     publicPath: '',
     clean: true,
   },
@@ -71,7 +72,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'manifest.json', to: '.' },
+        { from: isFirefox ? 'manifest.firefox.json' : 'manifest.chrome.json', to: 'manifest.json' },
         {
           from: path.dirname(require.resolve('monaco-editor/min/vs/loader.js')),
           to: 'monaco/min/vs',

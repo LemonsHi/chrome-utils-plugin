@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
 
-  "name": "Chrome Utils Plugin",
+  "name": "Firefox Utils Plugin",
   "description": "Dev-friendly toolbox (URL formatter, JSON formatter, Cookie tools, …) built with React & Ant Design",
   "version": "1.0.0",
 
@@ -13,31 +13,26 @@
   },
 
   "action": {
-    "default_title": "Chrome Utils",
+    "default_title": "Firefox Utils",
     "default_icon": {
       "16": "icons/16x16.png"
     }
   },
 
   "background": {
-    "scripts": ["background.js"],
-    "type": "module"
+    "scripts": ["background.js"]
   },
 
-  "permissions": ["sidePanel", "tabs", "cookies", "storage", "downloads"],
+  "permissions": ["tabs", "cookies", "storage", "downloads"],
 
   "host_permissions": ["<all_urls>"],
-
-  "side_panel": {
-    "default_path": "sidepanel.html"
-  },
 
   "content_security_policy": {
     "extension_pages": "script-src 'self'; worker-src 'self'; object-src 'self'"
   },
 
   "sidebar_action": {
-    "default_title": "Chrome Utils",
+    "default_title": "Firefox Utils",
     "default_panel": "sidepanel.html",
     "default_icon": {
       "16": "icons/16x16.png",
