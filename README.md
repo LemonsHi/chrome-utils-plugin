@@ -1,40 +1,48 @@
 # chrome-utils-plugin
 
-基于 **React**、**TypeScript** 与 **Ant Design** 打造的 Chrome 自定义工具插件，依托 Chrome **Side Panel** 集成多种常用小工具。
-后台脚本采用 Manifest V3 Service Worker，实现与侧边栏的无缝协作。
+基于 **React**、**TypeScript** 和 **Ant Design** 开发的浏览器工具集合插件。利用 Chrome **Side Panel** 汇聚常用小工具，后台通过 Manifest V3 Service Worker 与页面协作。
 
-## 功能
+## 功能特点
 
-- **URL 格式化**：支持解码、参数排序以及去除 hash，可一键复制结果。
-- **Cookie 设置**：将粘贴的 Cookie 字符串解析为表格，一键写入当前标签页。
-- **JSON 格式化**：提供编辑器和树状视图，可折叠并实时同步。
-- **图片上传**：拖拽、粘贴或选择图片后上传至 CDN（默认 ImgBB），并自动复制外链。
-- **二维码生成**：将当前或自定义链接转换为二维码，支持复制和下载。
-- **工具搜索**：在 side panel 中快速按关键字定位所需工具。
+- **URL 格式化**：支持解码、参数排序并移除 hash，一键复制结果。
+- **Cookie 设置**：粘贴 Cookie 字符串即可解析成表格并写入当前标签页。
+- **JSON 格式化**：编辑器与树状视图实时同步，可折叠数据。
+- **图片上传**：拖拽、粘贴或选择图片后上传至 CDN（默认 ImgBB），自动复制外链。
+- **二维码生成**：将当前或自定义链接转换为二维码，可复制与下载。
+- **工具搜索**：在 side panel 中快速按关键字定位工具。
 
-## 安装与使用
+## 开发与使用
 
-1. 执行 `npm install` 安装依赖（必要时配置 npm 镜像）。
-2. 运行 `npm run dev`，启动 webpack dev server 并自动打开 sidepanel 页面。
-3. 使用 `npm run build` 生成生产包，结果输出至 `dist/` 目录。
-4. 在 Chrome 扩展管理页选择“加载未解压的扩展”，指向 `dist/` 目录调试。
+### 环境要求
+- Node.js >= 20
 
-建议在发布前运行 `npm run lint:fix` 与 `npm run type-check`，以保证代码质量和类型安全。
+### 本地调试
+1. `npm run bootstrap` 安装依赖。
+2. `npm run dev` 启动开发环境并自动打开 side panel。
+3. 在 `chrome://extensions` 中选择「加载未解压的扩展」，指向 `dist/chrome`。
+4. 使用 `BROWSER=firefox npm run dev` 构建 `dist/firefox` 后，在 `about:debugging#/runtime/this-firefox` 中点击「加载临时附加组件」。
 
-## 项目目录结构
+### 构建
+- `npm run build:chrome` 生成 Chrome 包。
+- `npm run build:firefox` 生成 Firefox 包。
+
+发布前建议运行 `npm run lint:fix` 与 `npm run type-check`，确保代码质量与类型安全。
+
+## 项目结构
 
 ```
 chrome-utils-plugin/
-├── public/            扩展静态文件（图标、HTML 等）
-├── src/               React 源码
-│   ├── pages/         页面组件
-│   ├── tools/         具体工具
-│   └── background.ts  Chrome MV3 service worker
-├── manifest.json      Chrome 扩展描述文件
-└── webpack.config.js  打包配置
+├── public/                 扩展静态文件
+├── src/                    React 源码
+│   ├── pages/              页面组件
+│   ├── tools/              具体工具
+│   └── background.ts       MV3 service worker
+├── manifest.chrome.json    Chrome 描述文件
+├── manifest.firefox.json   Firefox 描述文件
+└── webpack.config.js       打包配置
 ```
 
-更多细节请查阅源代码，欢迎 Issue 与 PR。
+更多细节请参阅源码，欢迎 Issue 与 PR。
 
 ## License
 
